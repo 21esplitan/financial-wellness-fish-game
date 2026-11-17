@@ -42,7 +42,7 @@
     const left = Math.max(0, endAt - now);
     $("timer-bar").style.width = (left / (C.ROUND_SECONDS * 1000)) * 100 + "%";
     $("timer-text").textContent = Math.ceil(left / 1000);
-    document.querySelector(".timer").classList.toggle("low", left < 8000);
+    document.querySelector(".timer").classList.toggle("low", left < 6000);
     if (left <= 0) return endGame();
     raf = requestAnimationFrame(tick);
   }
