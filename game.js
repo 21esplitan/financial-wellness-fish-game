@@ -91,7 +91,8 @@
     const q = cur, fb = $("feedback");
     const verdict = ok ? '<b class="g">Correct! ' + (delta > 0 ? "+" : "") + delta + "</b>" : '<b class="r">Not quite, ' + delta + "</b>";
     fb.className = "feedback " + (ok ? "good" : "bad");
-    fb.innerHTML = verdict + " &middot; A: <b>" + esc(q.valA) + "</b> vs B: <b>" + esc(q.valB) + "</b><br>" + esc(q.why);
+    const vals = q.fact ? "" : " &middot; A: <b>" + esc(q.valA) + "</b> vs B: <b>" + esc(q.valB) + "</b>";
+    fb.innerHTML = verdict + vals + "<br>" + esc(q.why);
   }
 
   /* ---------- Leaderboard ---------- */
@@ -139,7 +140,8 @@
     $("final-rank").textContent = "";
     $("review").innerHTML = log.length ? log.map((l) => {
       const q = l.q;
-      return '<div class="rev"><span class="mark ' + (l.ok ? "ok" : "no") + '">' + (l.ok ? "✓" : "✗") + "</span><b>" + esc(q.ask) + "</b><br>A: " + esc(q.A) + " (" + esc(q.valA) + ")<br>B: " + esc(q.B) + " (" + esc(q.valB) + ")<br><i>" + esc(q.why) + "</i></div>";
+      const a = q.fact ? "" : " (" + esc(q.valA) + ")", b = q.fact ? "" : " (" + esc(q.valB) + ")";
+      return '<div class="rev"><span class="mark ' + (l.ok ? "ok" : "no") + '">' + (l.ok ? "✓" : "✗") + "</span><b>" + esc(q.ask) + "</b><br>A: " + esc(q.A) + a + "<br>B: " + esc(q.B) + b + "<br><i>" + esc(q.why) + "</i></div>";
     }).join("") : '<div class="empty">You didn\'t answer any. Next time, go fast!</div>';
     show("result");
     await submitScore(entry);

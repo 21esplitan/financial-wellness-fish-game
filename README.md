@@ -1,10 +1,10 @@
 # Swim Upstream: Time Value of Money Challenge
 
-A 20-second retro arcade fish game for the Utah Tech University Financial Wellness Center. Players pick the better of two
+A 30-second retro arcade fish game for the Utah Tech University Financial Wellness Center. Players pick the better of two
 time-value-of-money scenarios. Right answers send the fish upriver; wrong answers let the current push it back.
 
-- 30 plain-language questions, shuffled every round, with A/B sides randomized so the answer isn't always the same button
-- 20-second rounds. +100 per right answer (+20 streak bonus, up to 5 in a row), -50 per wrong answer, +300 for reaching the top
+- 56 plain-language questions (30 time-value-of-money, 26 money basics), shuffled every round, with A/B sides randomized so the answer isn't always the same button
+- 30-second rounds. +100 per right answer (+20 streak bonus, up to 5 in a row), -50 per wrong answer, +300 for reaching the top
 - Every answer is computed from formulas in `questions.js`, and each answer has a one-line explanation
 - Works on phones and laptops, no install; keyboard: A / B or arrow keys
 

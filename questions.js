@@ -132,10 +132,97 @@
       why: "\"0% interest\" still costs you the growth your cash would have earned." }
   ];
 
+  // Basic money-knowledge questions. A is always written as the right answer here;
+  // the game randomly swaps which side it appears on, so players can't memorize positions.
+  const FACTS = [
+    { ask: "What is a Roth IRA?",
+      A: "A savings account for retirement where you pay tax now, and the money grows and comes out tax-free later",
+      B: "A savings account where you pay no tax now, but pay tax when you take the money out",
+      why: "That's a Roth IRA, a tax-free savings account for retirement. The second one describes a traditional IRA." },
+    { ask: "Which account lets you save for medical costs with tax benefits?",
+      A: "HSA (Health Savings Account)", B: "Checking account",
+      why: "An HSA lets you set aside pre-tax money for medical bills, and it can grow tax-free." },
+    { ask: "What is a 529 plan?",
+      A: "A tax-friendly savings account for education costs", B: "A type of credit card",
+      why: "529 plans help you save for school, and the growth isn't taxed when used for education." },
+    { ask: "What is a 401(k)?",
+      A: "A retirement account through your job, and many employers add matching money", B: "A loan from your bank",
+      why: "A 401(k) is a work retirement account. If your employer matches, that's free money." },
+    { ask: "What is compound interest?",
+      A: "Interest you earn on your savings AND on interest you already earned", B: "A fee the bank charges to open an account",
+      why: "Compound interest means your interest earns interest. It's why starting early matters." },
+    { ask: "What is inflation?",
+      A: "Prices going up over time, so a dollar buys less", B: "Prices going down over time",
+      why: "With inflation, the same $1 buys less each year, so your savings need to grow." },
+    { ask: "What does diversifying your investments mean?",
+      A: "Spreading your money across many different investments", B: "Putting all your money in one company's stock",
+      why: "Don't put all your eggs in one basket. If one investment drops, the others can cushion it." },
+    { ask: "What is a stock?",
+      A: "A small piece of ownership in a company", B: "A loan you give to the government",
+      why: "Buy a stock and you own a tiny part of the company. A loan to the government is a bond." },
+    { ask: "What is a bond?",
+      A: "A loan you give to a company or government that pays you interest", B: "A small piece of ownership in a company",
+      why: "A bond is you lending money and getting paid interest. Owning part of a company is a stock." },
+    { ask: "What is an index fund?",
+      A: "A low-cost fund that holds many stocks at once", B: "A savings account that only pays on your birthday",
+      why: "Index funds hold lots of companies in one purchase, which makes them popular and simple." },
+    { ask: "What does FDIC insurance do?",
+      A: "Protects your money in a bank (up to a limit) if the bank fails", B: "Guarantees your stocks will go up",
+      why: "FDIC insurance covers bank deposits. It does not cover stock market losses." },
+    { ask: "Which usually has a higher chance of big gains AND bigger losses?",
+      A: "Stocks", B: "An insured savings account",
+      why: "Higher possible return comes with higher risk. Savings accounts are safer but grow slowly." },
+    { ask: "How much should a typical emergency fund cover?",
+      A: "3 to 6 months of basic living costs", B: "About one week of pay",
+      why: "A few months of expenses helps you handle a job loss or surprise bill." },
+    { ask: "Which action helps your credit score the MOST?",
+      A: "Paying every bill on time", B: "Checking your own score a lot",
+      why: "On-time payments are the biggest part of your credit score." },
+    { ask: "Which is better for your credit score?",
+      A: "Using a small part of your credit limit", B: "Using almost all of your credit limit",
+      why: "Using a small share of your limit shows you're not stretched thin." },
+    { ask: "You only pay the minimum on your credit card each month. What happens?",
+      A: "You pay a lot more in interest and stay in debt longer", B: "The debt disappears faster",
+      why: "Minimum payments mostly cover interest, so the balance barely drops." },
+    { ask: "Which one spends money you already have in your bank account?",
+      A: "A debit card", B: "A credit card",
+      why: "Debit pulls from your own money. Credit is borrowed money you must pay back." },
+    { ask: "What is net worth?",
+      A: "What you own minus what you owe", B: "How much you earn in a year",
+      why: "Net worth = assets minus debts. It's a snapshot of your financial health." },
+    { ask: "Which is your take-home pay, after taxes?",
+      A: "Net pay", B: "Gross pay",
+      why: "Gross pay is before taxes. Net pay is what actually lands in your account." },
+    { ask: "In the 50/30/20 budget, what is the 20% for?",
+      A: "Savings and paying off debt", B: "Fun and entertainment",
+      why: "50% needs, 30% wants, 20% savings and debt payoff." },
+    { ask: "What does \"pay yourself first\" mean?",
+      A: "Move money to savings as soon as you get paid", B: "Buy something fun before paying bills",
+      why: "Saving first, automatically, makes it much more likely you'll actually save." },
+    { ask: "Which is a NEED rather than a want?",
+      A: "Rent", B: "A streaming subscription",
+      why: "Needs keep you housed, fed and working. Wants make life nicer." },
+    { ask: "Where is the safest place to keep your emergency fund?",
+      A: "An insured savings account", B: "One risky stock",
+      why: "Emergency money should be safe and easy to reach, not at risk of dropping." },
+    { ask: "Someone calls and asks for your bank password to \"fix a problem.\" What should you do?",
+      A: "Hang up. It's a scam", B: "Give it to them so they can help",
+      why: "Real banks never ask for your password. Hang up and call the number on your card." },
+    { ask: "Which is a red flag for an investment scam?",
+      A: "Someone promises huge returns with no risk", B: "A clear statement showing your balance",
+      why: "No investment is risk-free. \"Guaranteed\" big returns are a classic scam sign." },
+    { ask: "The Rule of 72 gives a quick estimate of what?",
+      A: "How many years it takes your money to double", B: "How much tax you owe",
+      why: "Divide 72 by your yearly return. At 8%, money doubles in about 9 years." }
+  ];
+
   const money = (x) => "$" + Math.round(x).toLocaleString("en-US");
 
-  window.QUESTION_BANK = RAW.map((q, i) => Object.assign({
-    id: i, valA: money(q.va), valB: money(q.vb),
+  const numeric = RAW.map((q) => Object.assign({
+    valA: money(q.va), valB: money(q.vb),
     correct: (q.win === "high" ? q.va > q.vb : q.va < q.vb) ? "A" : "B"
   }, q));
+  const facts = FACTS.map((q) => Object.assign({ fact: true, correct: "A" }, q));
+
+  window.QUESTION_BANK = numeric.concat(facts).map((q, i) => Object.assign(q, { id: i }));
 })();

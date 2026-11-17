@@ -8,7 +8,7 @@
 <link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,15 +25,15 @@
   <section id="screen-start" class="screen active">
     <div class="card">
       <h1>CAN YOU BEAT<br>THE CURRENT?</h1>
-      <p class="lead">Two money choices show up. Pick the better one. Right answer: your fish swims upriver. Wrong answer: the current pushes it back.</p>
+      <p class="lead">Two money choices show up (or a quick money-basics question). Pick the better one. Right answer: your fish swims upriver. Wrong answer: the current pushes it back.</p>
       <ul class="rules">
-        <li><b>20 SECONDS</b> on the clock</li>
+        <li><b>30 SECONDS</b> on the clock</li>
         <li><b>+100</b> for each right answer, plus streak bonus</li>
         <li><b>&minus;50</b> for each wrong answer</li>
         <li>Reach the top of the river: <b>+300</b></li>
       </ul>
-      <label for="nick" class="label">ENTER NAME</label>
-      <input id="nick" type="text" maxlength="12" autocomplete="off" placeholder="FINFAN" enterkeyhint="go">
+      <label for="nick" class="label">ENTER YOUR NAME</label>
+      <input id="nick" type="text" maxlength="12" autocomplete="off" placeholder="Your name" enterkeyhint="go">
       <button id="btn-go" class="go">&#9654; GO!</button>
       <p class="hint">Keyboard? Press <kbd>A</kbd> or <kbd>B</kbd> (or &larr; &rarr;)</p>
     </div>
@@ -47,7 +47,7 @@
   <!-- PLAY -->
   <section id="screen-play" class="screen">
     <div class="hud">
-      <div class="timer"><div id="timer-bar"></div><span id="timer-text">20</span></div>
+      <div class="timer"><div id="timer-bar"></div><span id="timer-text">30</span></div>
       <div class="score">SCORE<b id="score">0</b></div>
     </div>
     <div class="river" id="river" aria-hidden="true">

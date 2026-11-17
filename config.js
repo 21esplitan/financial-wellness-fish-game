@@ -1,6 +1,6 @@
 // Game settings. Edit freely.
 window.FWC_CONFIG = {
-  ROUND_SECONDS: 20,        // length of one round (the yellow bar)
+  ROUND_SECONDS: 30,       // length of one round (the yellow bar)
   POINTS_CORRECT: 100,
   POINTS_WRONG: -50,
   STREAK_BONUS: 20,         // extra points per consecutive correct answer (max 5 in a row)
