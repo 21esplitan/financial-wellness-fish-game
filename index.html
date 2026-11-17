@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Swim Upstream: Time Value of Money Game</title>
+<meta name="description" content="Pick the better money scenario, swim your fish upriver. A Financial Wellness Center game.">
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <img src="logo.png" alt="Utah Tech University Financial Wellness Center" class="logo">
+  <div class="brand">
+    <div class="brand-title">Swim Upstream</div>
+    <div class="brand-sub">The Time Value of Money Challenge</div>
+  </div>
+</header>
+
+<main>
+  <!-- START -->
+  <section id="screen-start" class="screen active">
+    <div class="card">
+      <h1>Can you beat the current?</h1>
+      <p class="lead">Two money scenarios appear. Pick the better one. Get it right and your fish swims upriver. Get it wrong and the current drags it back.</p>
+      <ul class="rules">
+        <li><b>30 seconds</b> on the clock. Answer as many as you can.</li>
+        <li><b>+100</b> per right answer, with bonus points for streaks.</li>
+        <li><b>&minus;50</b> per wrong answer.</li>
+        <li>Reach the top of the river for a <b>+300</b> bonus.</li>
+      </ul>
+      <label for="nick" class="label">Your nickname</label>
+      <input id="nick" type="text" maxlength="12" autocomplete="off" placeholder="e.g. FinFan" enterkeyhint="go">
+      <button id="btn-go" class="go">GO!</button>
+      <p class="hint">Tip: on a keyboard, press <kbd>A</kbd> or <kbd>B</kbd> (or &larr; &rarr;).</p>
+    </div>
+    <div class="card">
+      <h2>Leaderboard</h2>
+      <div class="lb-mode" id="lb-mode-start"></div>
+      <ol class="lb" id="lb-start"></ol>
+    </div>
+  </section>
+
+  <!-- PLAY -->
+  <section id="screen-play" class="screen">
+    <div class="hud">
+      <div class="timer"><div id="timer-bar"></div><span id="timer-text">30</span></div>
+      <div class="score">Score <b id="score">0</b></div>
+    </div>
+    <div class="river" id="river" aria-hidden="true">
+      <div class="water w1"></div><div class="water w2"></div>
+      <div class="flag"><span>Spawning<br>grounds</span></div>
+      <div class="fish" id="fish">
+        <svg viewBox="0 0 80 40"><path d="M16 20 L2 7 L7 20 L2 33Z" fill="#ff6a1a"/><path d="M16 20 C26 4 56 4 70 20 C56 36 26 36 16 20Z" fill="#ff8a3d"/><path d="M32 12 Q40 3 50 12Z" fill="#ff6a1a"/><circle cx="60" cy="17" r="3.2" fill="#fff"/><circle cx="61" cy="17" r="1.5" fill="#111"/></svg>
+      </div>
+      <div class="pop" id="pop"></div>
+    </div>
+    <div class="question card">
+      <div class="ask" id="ask"></div>
+      <div class="choices">
+        <button class="choice" id="btn-a"><span class="tag">A</span><span class="txt" id="txt-a"></span></button>
+        <button class="choice" id="btn-b"><span class="tag">B</span><span class="txt" id="txt-b"></span></button>
+      </div>
+    </div>
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="screen-result" class="screen">
+    <div class="card center">
+      <div class="small">Time's up!</div>
+      <div class="big" id="final-score">0</div>
+      <div class="small" id="final-detail"></div>
+      <div class="rank" id="final-rank"></div>
+      <button id="btn-again" class="go">Play again</button>
+    </div>
+    <div class="card">
+      <h2>Leaderboard</h2>
+      <div class="lb-mode" id="lb-mode-result"></div>
+      <ol class="lb" id="lb-result"></ol>
+    </div>
+    <div class="card">
+      <h2>Review your answers</h2>
+      <div id="review"></div>
+    </div>
+  </section>
+</main>
+
+<footer>Educational game. Numbers are illustrative, not financial advice.</footer>
+
+<script src="config.js"></script>
+<script src="questions.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
